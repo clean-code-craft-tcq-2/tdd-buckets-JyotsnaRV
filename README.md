@@ -51,3 +51,10 @@ Start Test-driven approach
 1. Write the smallest possible failing test: give input `4,5`. assert output to be `4-5, 2`.
 1. Write the minimum amount of code that'll make it pass.
 1. Refactor any assumptions, continue to pass this test. Do not add any code without a corresponding test.
+
+Implement one failing test and at least one passing test:
+
+Passing Test Case - To check Continous readings in given range
+Passing Test Case - To check if Current reading range is empty(number of reading and empty array) and ERROR_INVALID
+Failing Test Case - To check if Current reading range is empty(number of reading and empty array) and OK_VALID
+Note: Comments should be removed to check the failing test case
