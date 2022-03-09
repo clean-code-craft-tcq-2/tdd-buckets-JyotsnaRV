@@ -22,7 +22,11 @@ batteryChargeReading_st checkBatteryChargeReading(int *chargeReading, int numOfR
     tempVar = chargeReading[loopCntr+1];
     batteryChargeDetails.paramStatus = OK_VALID;
   }
-
+  /* this below mentioned code can be tested directly based on loopCntr value, hence not checked */
+//  if((loopCntr == 0) || (chargeReading == NULL))
+//  {
+//   batteryChargeDetails.paramStatus = ERROR_INVALID;
+//  }
   batteryChargeDetails.continuousReadingCnt = continuousReading;
   batteryChargeDetails.totalReadingsCnt = loopCntr;
   return batteryChargeDetails;
