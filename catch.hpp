@@ -1,3 +1,13 @@
+/*
+ *  Catch v2.13.0
+ *  Generated: 2020-07-12 20:07:49.015950
+ *  ----------------------------------------------------------
+ *  This file has been merged from multiple headers. Please don't edit it directly
+ *  Copyright (c) 2020 Two Blue Cubes Ltd. All rights reserved.
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ */
 #ifndef TWOBLUECUBES_SINGLE_INCLUDE_CATCH_HPP_INCLUDED
 #define TWOBLUECUBES_SINGLE_INCLUDE_CATCH_HPP_INCLUDED
 // start catch.hpp
