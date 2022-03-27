@@ -7,7 +7,7 @@ TEST_CASE("To check Continous readings in given range - PASS") {
     batteryChargeReading_st batteryChargeDetails;
     int sizeOfArrayIndex = sizeof(CurrentChargeRange) / sizeof(CurrentChargeRange[0]); 
     batteryChargeDetails = checkBatteryChargeReading(&CurrentChargeRange[0],sizeOfArrayIndex);
-  REQUIRE(batteryChargeDetails.continuousReadingCnt == 2);
+  REQUIRE(batteryChargeDetails.continuousReadingCnt == 6);
 }
 
 TEST_CASE("To check if Current reading range is empty - PASS") 
