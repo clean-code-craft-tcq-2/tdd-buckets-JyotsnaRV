@@ -4,7 +4,7 @@
 batteryChargeReading_st checkBatteryChargeReading(int *chargeReading, int numOfReadings)
 {
   int loopCntr = 0;
-  int continuousReading =1, tempVar;
+  int continuousReading = 0, tempVar;
   int chargeCntr = 1;
   batteryChargeReading_st batteryChargeDetails;
   batteryChargeDetails.paramStatus = ERROR_INVALID;
@@ -19,7 +19,7 @@ batteryChargeReading_st checkBatteryChargeReading(int *chargeReading, int numOfR
   {
     if((tempVar+1) == chargeReading[loopCntr+1])
     {
-      continuousReading++; /* denotesthat continuous reading is present */
+      continuousReading++; /* denotes that continuous reading is present */
       /* The arrays store the set of continuous values recorded */
       batteryChargeDetails.continuousChargReadValue[chargeCntr-1] = tempVar;
       batteryChargeDetails.continuousChargReadValue[chargeCntr] =  tempVar+1;
