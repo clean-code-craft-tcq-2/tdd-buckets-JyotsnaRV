@@ -4,36 +4,47 @@
 batteryChargeReading_st checkBatteryChargeReading(int *chargeReading, int numOfReadings)
 {
   int loopCntr = 0;
-  int continuousReading = 0, tempVar;
+  int loopCntr_1 = 0;
+  int loopCntr_2 = 0;
+  int tempVar;
   int chargeCntr = 1;
   batteryChargeReading_st batteryChargeDetails;
   batteryChargeDetails.paramStatus = ERROR_INVALID;
   
   /* Sort the raw user data in ascending order */
   sortInputReadings(chargeReading, numOfReadings);
-  
+
   /* Below part of code performs the continuous range check 
    * Input is hence an already sorted array */
   tempVar = chargeReading[loopCntr];
-  for(;loopCntr<(numOfReadings-1);loopCntr++)
+  for(;loopCntr<(numOfReadings-1);)
   {
-    if((tempVar+1) == chargeReading[loopCntr+1])
+
+    for(;((tempVar == (chargeReading[loopCntr+1]-1))||(tempVar == (chargeReading[loopCntr+1])));)
     {
-      continuousReading++; /* denotes that continuous reading is present */
       /* The arrays store the set of continuous values recorded */
-      batteryChargeDetails.continuousChargReadValue[chargeCntr-1] = tempVar;
-      batteryChargeDetails.continuousChargReadValue[chargeCntr] =  tempVar+1;
-      chargeCntr += 2;
+
+      batteryChargeDetails.continuousChargeReadValueCnt[loopCntr_1][loopCntr_2] = tempVar;
+      batteryChargeDetails.continuousChargeReadValueCnt[loopCntr_1][loopCntr_2+1] = tempVar+1;
+      
+        batteryChargeDetails.continuousReadingCnt[loopCntr_1] += 1; /* denotes that continuous reading is present */
+
+        loopCntr += 1;
+        tempVar = chargeReading[loopCntr];
+
+        loopCntr_2+=1;
+
+        printf("\n");
     }
-    tempVar = chargeReading[loopCntr+1];
+
+    printf("Count of the continuous range-%d: %d\n",loopCntr_1+1,batteryChargeDetails.continuousReadingCnt[loopCntr_1]+1);
+    
+    loopCntr += 1;
+    tempVar = chargeReading[loopCntr];
+
+    loopCntr_1 +=1;
+    loopCntr_2 = 0;
     batteryChargeDetails.paramStatus = OK_VALID;
   }
-  /* this below mentioned code can be tested directly based on loopCntr value, hence not checked */
-//  if((loopCntr == 0) || (chargeReading == NULL))
-//  {
-//   batteryChargeDetails.paramStatus = ERROR_INVALID;
-//  }
-  batteryChargeDetails.continuousReadingCnt = continuousReading;
-  batteryChargeDetails.totalReadingsCnt = loopCntr;
-  return batteryChargeDetails;
+ return batteryChargeDetails;  
 }
