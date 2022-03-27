@@ -12,10 +12,10 @@ typedef enum
 /* Structure declarations */
 typedef struct
 {
-  int continuousReadingCnt;
+  int continuousReadingCnt[ARRINDEXSIZE];
   retChargeReadingStatus_en paramStatus;
   int continuousChargReadValue[ARRINDEXSIZE];
-  int continuousChargeReadValueCnt[ARRINDEXSIZE];
+  int continuousChargeReadValueCnt[ARRINDEXSIZE][ARRINDEXSIZE];
 }batteryChargeReading_st;
 
 /* function declarations */
