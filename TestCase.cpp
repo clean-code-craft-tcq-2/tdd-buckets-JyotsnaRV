@@ -7,7 +7,7 @@ TEST_CASE("To check Continous readings in given range - PASS") {
     batteryChargeReading_st batteryChargeDetails;
     int sizeOfArrayIndex = sizeof(CurrentChargeRange) / sizeof(CurrentChargeRange[0]); 
     batteryChargeDetails = checkBatteryChargeReading(&CurrentChargeRange[0],sizeOfArrayIndex);
-  REQUIRE(batteryChargeDetails.continuousReadingCnt == 6);
+  REQUIRE(batteryChargeDetails.continuousReadingCnt[0] == 1);
 }
 
 TEST_CASE("To check if Current reading range is empty - PASS") 
@@ -17,6 +17,14 @@ TEST_CASE("To check if Current reading range is empty - PASS")
     int sizeOfArrayIndex = sizeof(CurrentChargeRange) / sizeof(CurrentChargeRange[0]);
     batteryChargeDetails = checkBatteryChargeReading(&CurrentChargeRange[0],sizeOfArrayIndex);
   REQUIRE(batteryChargeDetails.paramStatus == ERROR_INVALID);
+}
+
+TEST_CASE("To check Continous readings in given range - PASS") {
+    int CurrentChargeRange[] = {3,3,5,4,10,11,12};
+    batteryChargeReading_st batteryChargeDetails;
+    int sizeOfArrayIndex = sizeof(CurrentChargeRange) / sizeof(CurrentChargeRange[0]); 
+    batteryChargeDetails = checkBatteryChargeReading(&CurrentChargeRange[0],sizeOfArrayIndex);
+  REQUIRE(batteryChargeDetails.continuousReadingCnt[1] == 2);
 }
 
 /*
