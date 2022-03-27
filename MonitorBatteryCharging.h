@@ -13,7 +13,6 @@ typedef enum
 typedef struct
 {
   int continuousReadingCnt;
-  int totalReadingsCnt;
   retChargeReadingStatus_en paramStatus;
   int continuousChargReadValue[ARRINDEXSIZE];
   int continuousChargeReadValueCnt[ARRINDEXSIZE];
