@@ -3,7 +3,7 @@
 
 /* Function which sorts the raw input readings in ascending order 
  * Provide this sorted range of values to the next processing element */
-batteryChargeReading_st sortInputReadings(int *InputReading, int numOfInputReading)
+void sortInputReadings(int *InputReading, int numOfInputReading)
 {
   int cntr, inner_cntr, swapVar;
 
@@ -11,13 +11,13 @@ batteryChargeReading_st sortInputReadings(int *InputReading, int numOfInputReadi
   {
     for (inner_cntr = 0 ; inner_cntr < numOfInputReading - cntr - 1; inner_cntr++)
     {
-      if (InputReading.continuousChargReadValue[inner_cntr] > InputReading.continuousChargReadValue[inner_cntr+1])
+      if (InputReading[inner_cntr] > InputReading[inner_cntr+1])
       {
-        swapVar = InputReading.continuousChargReadValue[inner_cntr];
-        InputReading.continuousChargReadValue[inner_cntr]   = InputReading.continuousChargReadValue[inner_cntr + 1];
-        InputReading.continuousChargReadValue[inner_cntr + 1] = swapVar;
+        swapVar = InputReading[inner_cntr];
+        InputReading[inner_cntr] = InputReading[inner_cntr + 1];
+        InputReading[inner_cntr + 1] = swapVar;
       }
     }
   }
-  return InputReading;
+
 }
