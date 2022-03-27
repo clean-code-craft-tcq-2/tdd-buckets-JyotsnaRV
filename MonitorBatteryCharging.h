@@ -21,4 +21,5 @@ typedef struct
 
 /* function declarations */
 batteryChargeReading_st checkBatteryChargeReading(int *chargeReading, int numOfReadings);
+batteryChargeReading_st sortInputReadings(int *InputReading, int numOfInputReading);
 #endif /* MONITORBATTERYCHARGING_H */
