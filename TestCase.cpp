@@ -19,7 +19,7 @@ TEST_CASE("To check if Current reading range is empty - PASS")
   REQUIRE(batteryChargeDetails.paramStatus == ERROR_INVALID);
 }
 
-TEST_CASE("To check Continous readings in given range - PASS") {
+TEST_CASE("To check Continous readings in given range - PASS1") {
     int CurrentChargeRange[] = {3,3,5,4,10,11,12};
     batteryChargeReading_st batteryChargeDetails;
     int sizeOfArrayIndex = sizeof(CurrentChargeRange) / sizeof(CurrentChargeRange[0]); 
