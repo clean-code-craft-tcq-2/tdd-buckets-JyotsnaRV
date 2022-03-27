@@ -8,16 +8,22 @@ batteryChargeReading_st checkBatteryChargeReading(int *chargeReading, int numOfR
   int chargeCntr = 1;
   batteryChargeReading_st batteryChargeDetails;
   batteryChargeDetails.paramStatus = ERROR_INVALID;
+  
+  /* Sort the raw user data in ascending order */
+  sortInputReadings(chargeReading, numOfReadings);
+  
+  /* Below part of code performs the continuous range check 
+   * Input is hence an already sorted array */
   tempVar = chargeReading[loopCntr];
   for(;loopCntr<(numOfReadings-1);loopCntr++)
   {
     if((tempVar+1) == chargeReading[loopCntr+1])
     {
-      continuousReading++; /* denotes continuous reading are present */
-      /* these below mwntioned array stores the set of continuous values recorded */
-      batteryChargeDetails.continuousChargReadValue[chargeCntr-1] =  tempVar;
+      continuousReading++; /* denotesthat continuous reading is present */
+      /* The arrays store the set of continuous values recorded */
+      batteryChargeDetails.continuousChargReadValue[chargeCntr-1] = tempVar;
       batteryChargeDetails.continuousChargReadValue[chargeCntr] =  tempVar+1;
-      chargeCntr+=2;
+      chargeCntr += 2;
     }
     tempVar = chargeReading[loopCntr+1];
     batteryChargeDetails.paramStatus = OK_VALID;
