@@ -10,12 +10,12 @@ TEST_CASE("To check Continous readings in multiple ranges - PASS") {
   printRanges(ranges);
   
   REQUIRE((ranges[0].lowerLim) == 1);
-  REQUIRE((ranges[0].upperLim) == 2);
-  REQUIRE((ranges[0].numberOfElements) == 3);
+  REQUIRE((ranges[0].upperLim) == 5);
+  REQUIRE((ranges[0].numberOfElements) == 6);
   
-  REQUIRE((ranges[1].lowerLim) == 5);
-  REQUIRE((ranges[1].upperLim) == 9);
-  REQUIRE((ranges[1].numberOfElements) == 5);
+  REQUIRE((ranges[1].lowerLim) == 9);
+  REQUIRE((ranges[1].upperLim) == 10);
+  REQUIRE((ranges[1].numberOfElements) == 2);
 }
 
 TEST_CASE("check if convert function works") {
