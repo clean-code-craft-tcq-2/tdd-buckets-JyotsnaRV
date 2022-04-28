@@ -1,5 +1,6 @@
 #ifndef  MONITORBATTERYCHARGING_H
 #define  MONITORBATTERYCHARGING_H
+#include<math.h>
 
 struct ranges{
 	int lowerLim;
