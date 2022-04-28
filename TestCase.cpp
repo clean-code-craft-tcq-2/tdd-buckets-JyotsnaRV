@@ -4,18 +4,29 @@
 #include "D2A_Converter.h"
 
 TEST_CASE("To check Continous readings in multiple ranges - PASS") {
-	int arr[] = {1,1,2,5,6,8,7,9};
+	int arr[] = {3,3,5,4,10,11,12};
 	struct ranges* ranges;
-  ranges = findRanges(arr,2);
+  ranges = findRanges(arr,7);
   printRanges(ranges);
   
-  REQUIRE((ranges[0].lowerLim) == 1);
+  REQUIRE((ranges[0].lowerLim) == 3);
   REQUIRE((ranges[0].upperLim) == 5);
-  REQUIRE((ranges[0].numberOfElements) == 6);
+  REQUIRE((ranges[0].numberOfElements) == 4);
   
-  REQUIRE((ranges[1].lowerLim) == 9);
-  REQUIRE((ranges[1].upperLim) == 10);
-  REQUIRE((ranges[1].numberOfElements) == 2);
+  REQUIRE((ranges[1].lowerLim) == 10);
+  REQUIRE((ranges[1].upperLim) == 12);
+  REQUIRE((ranges[1].numberOfElements) == 3);
+}
+
+TEST_CASE("To check function behavior when empty array is passed") {
+	int arr[] = {};
+	struct ranges* ranges;
+  ranges = findRanges(arr,0);
+  printRanges(ranges);
+  
+  REQUIRE((ranges[0].lowerLim) == 0);
+  REQUIRE((ranges[0].upperLim) == 0);
+  REQUIRE((ranges[0].numberOfElements) == 0);
 }
 
 TEST_CASE("check if convert function works") {
