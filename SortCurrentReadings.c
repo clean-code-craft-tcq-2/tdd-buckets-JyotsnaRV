@@ -21,3 +21,10 @@ void sortInputReadings(int *InputReading, int numOfInputReading)
   }
 
 }
+
+/* Function to return the absolute values in the array provided with both positive and negative elements */
+void absoluteArray(int* values, int numberOfValues)
+{
+	for(int i =0; i<numberOfValues ; i++)
+		((int*)values)[i] = abs(((int*)values)[i]);
+}
