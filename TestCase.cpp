@@ -24,8 +24,6 @@ TEST_CASE("To check function behavior when empty array is passed") {
   ranges = findRanges(arr,0);
   printRanges(ranges);
   
-  REQUIRE((ranges[0].lowerLim) == 0);
-  REQUIRE((ranges[0].upperLim) == 0);
   REQUIRE((ranges[0].numberOfElements) == 0);
 }
 
