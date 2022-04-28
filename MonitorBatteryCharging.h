@@ -1,24 +1,16 @@
 #ifndef  MONITORBATTERYCHARGING_H
 #define  MONITORBATTERYCHARGING_H
-/* Macro Declaration */
-#define ARRINDEXSIZE 30
 
-/* Enum declarations */
-typedef enum
-{
-  OK_VALID,
-  ERROR_INVALID
-}retChargeReadingStatus_en;
-/* Structure declarations */
-typedef struct
-{
-  int continuousReadingCnt[ARRINDEXSIZE];
-  retChargeReadingStatus_en paramStatus;
-  int continuousChargReadValue[ARRINDEXSIZE];
-  int continuousChargeReadValueCnt[ARRINDEXSIZE][ARRINDEXSIZE];
-}batteryChargeReading_st;
+struct ranges{
+	int lowerLim;
+	int upperLim;
+	int numberOfElements;
+};
 
 /* function declarations */
-batteryChargeReading_st checkBatteryChargeReading(int *chargeReading, int numOfReadings);
 void sortInputReadings(int *InputReading, int numOfInputReading);
+void absoluteArray(int* values, int numberOfValues);
+struct ranges* findRanges(int* values, int numberOfValues);
+void printRanges(struct ranges* finalRangesToPrint);
+
 #endif /* MONITORBATTERYCHARGING_H */
