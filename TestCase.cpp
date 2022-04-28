@@ -4,7 +4,7 @@
 #include "D2A_Converter.h"
 
 TEST_CASE("To check Continous readings in multiple ranges - PASS") {
-    int CurrentChargeRange[] = {1,1,2,5,6,8,7,9};
+	int arr[] = {1,1,2,5,6,8,7,9};
 	struct ranges* ranges;
   ranges = findRanges(arr,2);
   printRanges(ranges);
