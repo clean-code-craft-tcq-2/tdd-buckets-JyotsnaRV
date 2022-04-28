@@ -18,15 +18,6 @@ TEST_CASE("To check Continous readings in multiple ranges - PASS") {
   REQUIRE((ranges[1].numberOfElements) == 3);
 }
 
-TEST_CASE("To check function behavior when empty array is passed") {
-	int arr[] = {};
-	struct ranges* ranges;
-  ranges = findRanges(arr,0);
-  printRanges(ranges);
-  
-  REQUIRE((ranges[0].numberOfElements) == 0);
-}
-
 TEST_CASE("check if convert function works") {
   int analogValue = 1146, digitalValue;
   
