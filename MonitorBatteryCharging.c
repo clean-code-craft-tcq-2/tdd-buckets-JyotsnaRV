@@ -1,50 +1,57 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "MonitorBatteryCharging.h"
 
-batteryChargeReading_st checkBatteryChargeReading(int *chargeReading, int numOfReadings)
+struct ranges finalRanges[5] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
+static int numberOfRanges = 0;
+
+static void categoriseValue(const void* values, int * controlVariable, int numberOfValues)
 {
-  int loopCntr = 0;
-  int loopCntr_1 = 0;
-  int loopCntr_2 = 0;
-  int tempVar;
-  int chargeCntr = 1;
-  batteryChargeReading_st batteryChargeDetails;
-  batteryChargeDetails.paramStatus = ERROR_INVALID;
-  
-  /* Sort the raw user data in ascending order */
-  sortInputReadings(chargeReading, numOfReadings);
+	if((((int*)values)[*controlVariable] >= finalRanges[numberOfRanges].upperLim) && (((((int*)values)[*controlVariable-1]+1) == ((int*)values)[*controlVariable]) || ((((int*)values)[*controlVariable-1]) == ((int*)values)[*controlVariable])) )
+	{
+		finalRanges[numberOfRanges].upperLim = ((int*)values)[*controlVariable];
+		finalRanges[numberOfRanges].numberOfElements += 1;
+	}else if ((((int*)values)[*controlVariable-1]+1) != ((int*)values)[*controlVariable])
+	{
+		numberOfRanges++;
+		finalRanges[numberOfRanges].lowerLim = ((int*)values)[*controlVariable];
+		if(*controlVariable+1 < numberOfValues)
+		{
+			finalRanges[numberOfRanges].upperLim = ((int*)values)[*controlVariable+1];
+			finalRanges[numberOfRanges].numberOfElements = 2;
+		}else
+		{
+			finalRanges[numberOfRanges].numberOfElements = 1;
+		}
+		*controlVariable = *controlVariable+1; //increment i by 1 here and then immediate increment will be done by for loop
+	}
+}
 
-  /* Below part of code performs the continuous range check 
-   * Input is hence an already sorted array */
-  tempVar = chargeReading[loopCntr];
-  for(;loopCntr<(numOfReadings-1);)
-  {
+struct ranges* findRanges(int* values, int numberOfValues)
+{
+	int i;
+	numberOfRanges = 0;
+	
+	absoluteArray(values, numberOfValues);
+	sortInputReadings(values, numberOfValues);
+	
+	finalRanges[numberOfRanges].lowerLim = ((int*)values)[0];
+	finalRanges[numberOfRanges].upperLim = ((int*)values)[1];
+	finalRanges[numberOfRanges].numberOfElements = 2;
+	
+	for(i = 2; i < numberOfValues; i++)
+	{
+		categoriseValue(values,&i, numberOfValues);
+	}
+	
+	return finalRanges;
+}
 
-    for(;((tempVar == (chargeReading[loopCntr+1]-1))||(tempVar == (chargeReading[loopCntr+1])));)
+void printRanges(struct ranges* finalRangesToPrint)
+{
+	printf("\nRange, Readings\n");
+    for (int i = 0 ; i <= numberOfRanges ; i++)
     {
-      /* The arrays store the set of continuous values recorded */
-
-      batteryChargeDetails.continuousChargeReadValueCnt[loopCntr_1][loopCntr_2] = tempVar;
-      batteryChargeDetails.continuousChargeReadValueCnt[loopCntr_1][loopCntr_2+1] = tempVar+1;
-      
-        batteryChargeDetails.continuousReadingCnt[loopCntr_1] += 1; /* denotes that continuous reading is present */
-
-        loopCntr += 1;
-        tempVar = chargeReading[loopCntr];
-
-        loopCntr_2+=1;
-
-        printf("\n");
-    }
-
-    printf("Count of the continuous range-%d: %d\n",loopCntr_1+1,batteryChargeDetails.continuousReadingCnt[loopCntr_1]+1);
-    
-    loopCntr += 1;
-    tempVar = chargeReading[loopCntr];
-
-    loopCntr_1 +=1;
-    loopCntr_2 = 0;
-    batteryChargeDetails.paramStatus = OK_VALID;
-  }
- return batteryChargeDetails;  
+    	printf("%d - %d, %d\n", finalRangesToPrint[i].lowerLim, finalRangesToPrint[i].upperLim, finalRangesToPrint[i].numberOfElements);
+	}
 }
